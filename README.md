@@ -1,87 +1,57 @@
-# Sorting Algorithms Optimization on ARM7TDMI
+# Sorting Algorithms on ARM7TDMI
 
-This project contains implementations and optimizations of sorting algorithms for the ARM7TDMI architecture. The algorithms included are:
+This repository contains ARM assembly implementations of three classic sorting algorithms, optimized for the ARM7TDMI microcontroller:
 
-- **Bubble Sort**
-- **Quick Sort**
-- **Radix Sort**
+- **Bubble Sort**  
+- **Quick Sort**  
+- **Radix Sort**  
 
----
-
-## Table of Contents
-
-- [Overview](#overview)  
-- [Prerequisites](#prerequisites)  
-- [Building the Project](#building-the-project)  
-- [Running the Code](#running-the-code)  
-- [Algorithms](#algorithms)  
-- [Notes](#notes)
+These implementations are intended for educational purposes and embedded systems projects.
 
 ---
 
-## Overview
+## Repository Contents
 
-This project demonstrates the implementation of common sorting algorithms in ARM assembly language optimized for the ARM7TDMI processor. The goal is to explore and optimize these algorithms at the assembly level to understand low-level performance considerations.
+| File            | Description                      |
+| --------------- | --------------------------------|
+| `bubble_sort.s` | Bubble Sort implementation       |
+| `quick_sort.s`  | Quick Sort implementation        |
+| `radix_sort.s`  | Radix Sort implementation        |
 
 ---
 
 ## Prerequisites
 
-- **ARM Toolchain**: Make sure you have an ARM assembler and linker installed (e.g., `arm-none-eabi-as` and `arm-none-eabi-ld`).
-- **Emulator or Hardware**: Use QEMU or real hardware with ARM7TDMI support to run the binaries.
-- **Make** (optional) or manually run commands in the terminal.
+- ARM7TDMI assembler and linker (e.g., `arm-none-eabi-as`, `arm-none-eabi-ld`)  
+- Emulator or development board supporting ARM7TDMI (e.g., QEMU, LPC2148)
 
 ---
 
-## Building the Project
+## Building and Running
 
-You can assemble and link each sorting algorithm source file separately or all together.
-
-Example commands for assembling and linking a single file (`radix_sort.s`):
+### Assemble the source files:
 
 ```bash
-# Assemble
-arm-none-eabi-as -mcpu=arm7tdmi -o radix_sort.o radix_sort.s
+arm-none-eabi-as -o bubble_sort.o bubble_sort.s
+arm-none-eabi-as -o quick_sort.o quick_sort.s
+arm-none-eabi-as -o radix_sort.o radix_sort.s
 
-# Link
+## Link the object files:
+
+```bash
+arm-none-eabi-ld -o bubble_sort.elf bubble_sort.o
+arm-none-eabi-ld -o quick_sort.elf quick_sort.o
 arm-none-eabi-ld -o radix_sort.elf radix_sort.o
 
-# (Optional) Convert to binary or hex if needed
-arm-none-eabi-objcopy -O binary radix_sort.elf radix_sort.bin
-For all source files (bubble_sort.s, quick_sort.s, radix_sort.s), assemble and link similarly:
+## Run on QEMU ARM emulator:
 
-bash
-Copy
-Edit
-arm-none-eabi-as -mcpu=arm7tdmi -o bubble_sort.o bubble_sort.s
-arm-none-eabi-as -mcpu=arm7tdmi -o quick_sort.o quick_sort.s
-arm-none-eabi-as -mcpu=arm7tdmi -o radix_sort.o radix_sort.s
+```bash
+qemu-arm bubble_sort.elf
+qemu-arm quick_sort.elf
+qemu-arm radix_sort.elf
 
-arm-none-eabi-ld -o sorting_algorithms.elf bubble_sort.o quick_sort.o radix_sort.o
-Running the Code
-Run the generated ELF file using QEMU ARM emulator:
+## Cleaning build files
 
-bash
-Copy
-Edit
-qemu-arm sorting_algorithms.elf
-Or flash and run on your ARM7TDMI-based hardware.
+```bash
+rm -f *.o *.elf
 
-Algorithms
-Bubble Sort
-Simple comparison-based sorting, repeatedly swapping adjacent elements if they are in the wrong order.
-
-Quick Sort
-Efficient divide-and-conquer sorting that partitions the array and recursively sorts subarrays.
-
-Radix Sort
-Non-comparison-based sorting that processes digits starting from the least significant digit to the most significant.
-
-Notes
-The code is written in ARM assembly with .syntax unified for compatibility.
-
-Stack usage and registers are managed carefully to ensure correctness.
-
-Optimizations were focused on reducing instructions and memory usage.
-
-Tested on QEMU ARM7TDMI emulator and real hardware.
