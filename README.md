@@ -36,21 +36,21 @@ arm-none-eabi-as -o bubble_sort.o bubble_sort.s
 arm-none-eabi-as -o quick_sort.o quick_sort.s
 arm-none-eabi-as -o radix_sort.o radix_sort.s
 
-## Link the object files:
+### Link the object files:
 
 ```bash
 arm-none-eabi-ld -o bubble_sort.elf bubble_sort.o
 arm-none-eabi-ld -o quick_sort.elf quick_sort.o
 arm-none-eabi-ld -o radix_sort.elf radix_sort.o
 
-## Run on QEMU ARM emulator:
+### Run on QEMU ARM emulator:
 
 ```bash
 qemu-arm bubble_sort.elf
 qemu-arm quick_sort.elf
 qemu-arm radix_sort.elf
 
-## Cleaning build files
+### Cleaning build files
 
 ```bash
 rm -f *.o *.elf
