@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Deklaracije sortirajućih funkcija (implementiraj ih u drugim datotekama)
+// Deklaracije sortirajućih funkcija 
 void quick_sort(int arr[], int low, int high);
 void radix_sort(int arr[], int n);
 void bubble_sort(int arr[], int n);
